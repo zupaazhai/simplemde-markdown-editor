@@ -5,7 +5,7 @@ A drop-in JavaScript textarea replacement for writing beautiful and understandab
 
 [![Preview](http://i.imgur.com/zqWfJwO.png)](https://simplemde.com)
 
-## What folked version change
+## What folked version changed
 Implement suggestion by show-hint.js addon, inspire by [samdark/codemirror-autosuggest](https://github.com/samdark/codemirror-autosuggest). if you want to add list for suggestionm, just add option `suggestions`.
 
 ```javascript
