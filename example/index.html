@@ -17,21 +17,27 @@
             suggestions: [
                 {
                     startChar: '@',
-                    list: function () {
-                        return [
+                    list: function (tokenAfterChar) {
+
+                        var people = [
                             {
                                 text: "prayutofficial ",
-                                displayText: "Prayut Chan-o-cha"
+                                displayText: "prayutofficial (Prayut Chan-o-cha)"
                             },
                             {
                                 text: "ThaksinLive ",
-                                displayText: "Thaksin Shinawatra"
+                                displayText: "ThaksinLive (Thaksin Shinawatra)"
                             },
                             {
                                 text: "Abhisit_DP ",
-                                displayText: "Abhisit Vejjajiva"
+                                displayText: "Abhisit_DP (Abhisit Vejjajiva)"
                             }
-                        ]
+                        ];
+
+                        return people.filter(function (person) {
+
+                            return person.text.toLowerCase().indexOf(tokenAfterChar.toLowerCase()) > -1
+                        });
                     }
                 },
                 {

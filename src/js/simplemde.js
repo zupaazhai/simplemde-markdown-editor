@@ -2039,6 +2039,8 @@ SimpleMDE.prototype.defineSuggestionOption = function() {
 
 		editor.on("inputRead", function(editor, changevalue) {
 
+			var startCharAt = 0;
+
 			value.forEach(function(suggestion) {
 
 				if(changevalue.text[0] == suggestion.startChar) {
@@ -2047,12 +2049,24 @@ SimpleMDE.prototype.defineSuggestionOption = function() {
 						completeSingle: false,
 						hint: function(editor) {
 							var cur = editor.getCursor(),
-								token = editor.getTokenAt(cur);
-							var start = token.start + 1,
+								token = editor.getTokenAt(cur),
 								end = token.end;
+
+							if(token.string == suggestion.startChar) {
+								startCharAt = token.end;
+							}
+
+							var tokenAfterStartChar = editor.getRange({
+								line: cur.line,
+								ch: startCharAt
+							}, {
+								line: cur.line,
+								ch: end
+							});
+
 							return {
-								list: suggestion.list(),
-								from: CodeMirror.Pos(cur.line, start),
+								list: suggestion.list(tokenAfterStartChar),
+								from: CodeMirror.Pos(cur.line, startCharAt),
 								to: CodeMirror.Pos(cur.line, end)
 							};
 						}
